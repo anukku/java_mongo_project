@@ -14,4 +14,10 @@ public class Product {
     private String description;
     private int score;
 
+    public Product(int price, Sizes size, String description, int score) {
+        this.price = price;
+        this.size = size;
+        this.description = description;
+        this.score = score;
+    }
 }
