@@ -18,7 +18,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Optional<User> getUserById(Long id){
+    public Optional<User> getUserById(String id){
         return userRepository.findById(id);
     }
 
@@ -26,8 +26,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void saveUser(Long id, String name){
-        userRepository.save(new User(id ,name));
+    public void saveUser(String username, String password){
+        userRepository.save(new User(username, password));
     }
 
 

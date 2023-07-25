@@ -22,17 +22,17 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public Optional<User> getUserByName(@RequestParam(value = "id") Long id) {
+    public Optional<User> getUserByName(@RequestParam(value = "id") String id) {
         return userService.getUserById(id);
     }
 
-    @GetMapping("/user/all")
+    @GetMapping("/user/getAll")
     public List<User> getAll() {
         return userService.getAll();
     }
 
-    @PostMapping("/user")
-    public void saveUserByName(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name) {
-        userService.saveUser(id, name);
+    @PostMapping("/userLogin")
+    public void saveUserByName(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+        userService.saveUser(username, password);
     }
 }
