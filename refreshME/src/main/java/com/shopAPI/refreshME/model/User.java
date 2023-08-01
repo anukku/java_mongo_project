@@ -1,5 +1,6 @@
 package com.shopAPI.refreshME.model;
 
+import com.shopAPI.refreshME.other.InvalidPasswordException;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,10 +12,20 @@ public class User {
     private String id;
     private String userName;
     private String password;
+    private String confirmPassword;
 
-    public User(String userName, String password) {
+    public User(String userName, String password, String confirmPassword) {
         this.userName = userName;
         this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getId() {
@@ -47,6 +58,7 @@ public class User {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
                 '}';
     }
 }

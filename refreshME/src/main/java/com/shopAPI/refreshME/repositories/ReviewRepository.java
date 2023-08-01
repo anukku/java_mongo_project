@@ -8,6 +8,4 @@ import java.util.Optional;
 
 public interface ReviewRepository extends MongoRepository <Review, String> {
 
-//    Optional<Review> findById(String id);
-//    List<Review> findAll();
 }

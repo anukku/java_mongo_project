@@ -26,8 +26,19 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void saveUser(String username, String password){
-        userRepository.save(new User(username, password));
+    public void saveUser(String username, String password, String confirmPassword){
+        userRepository.save(new User(username, password, confirmPassword));
+    }
+
+    public Optional<User> validateLogin(String username, String password) {
+        Optional<User> userOptional = userRepository.findByUserName(username);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (user.getPassword().equals(password)) {
+                return userOptional; // Login successful
+            }
+        }
+        return Optional.empty(); // Login failed
     }
 
 

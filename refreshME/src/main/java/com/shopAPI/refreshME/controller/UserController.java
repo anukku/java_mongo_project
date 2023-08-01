@@ -1,13 +1,15 @@
 package com.shopAPI.refreshME.controller;
 
 import com.shopAPI.refreshME.model.User;
+import com.shopAPI.refreshME.other.InvalidPasswordException;
 import com.shopAPI.refreshME.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +33,41 @@ public class UserController {
         return userService.getAll();
     }
 
+    @PostMapping("/signup")
+    public void signup(
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "password") String password,
+            @RequestParam(value = "confirmPassword") String confirmPassword,
+            HttpServletResponse response) throws IOException {
+        // Check if the passwords match
+        if (!password.equals(confirmPassword)) {
+            response.sendRedirect("/signup.html?error=PasswordsDoNotMatch");
+            return;
+        }
+
+        // Save the user if passwords match
+        userService.saveUser(username, password, confirmPassword);
+        System.out.println("New user was created");
+        response.sendRedirect("/login.html?success=true");
+    }
+
     @PostMapping("/login")
-    public void saveUserByName(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
-        userService.saveUser(username, password);
+    public void login(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+        System.out.println("Received login request for username: " + username);
+
+        Optional<User> user = userService.validateLogin(username, password);
+        if (user.isPresent()) {
+            System.out.println("Login successful for username: " + username);
+            // If login is successful, redirect to the welcome page
+            response.sendRedirect("/welcome.html?username=" + username);
+        } else {
+            System.out.println("Login failed for username: " + username);
+            // If login fails, redirect back to the login page with an error message
+            response.sendRedirect("/login.html?error=InvalidCredentials");
+        }
     }
 }
