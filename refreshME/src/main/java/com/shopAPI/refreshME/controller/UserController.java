@@ -1,6 +1,6 @@
 package com.shopAPI.refreshME.controller;
 
-import com.shopAPI.refreshME.User;
+import com.shopAPI.refreshME.model.User;
 import com.shopAPI.refreshME.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +31,7 @@ public class UserController {
         return userService.getAll();
     }
 
-    @PostMapping("/userLogin")
+    @PostMapping("/login")
     public void saveUserByName(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
         userService.saveUser(username, password);
     }

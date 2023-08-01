@@ -1,7 +1,7 @@
 package com.shopAPI.refreshME.service;
 
-import com.shopAPI.refreshME.User;
-import com.shopAPI.refreshME.UserRepository;
+import com.shopAPI.refreshME.model.User;
+import com.shopAPI.refreshME.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

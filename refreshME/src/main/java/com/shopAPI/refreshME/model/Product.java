@@ -1,5 +1,6 @@
-package com.shopAPI.refreshME;
+package com.shopAPI.refreshME.model;
 
+import com.shopAPI.refreshME.other.Sizes;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
