@@ -7,9 +7,5 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableMongoRepositories
 public class RefreshMeApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(RefreshMeApplication.class, args);
-	}
-
+	public static void main(String[] args) {SpringApplication.run(RefreshMeApplication.class, args);}
 }

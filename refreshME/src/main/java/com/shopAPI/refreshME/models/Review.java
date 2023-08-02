@@ -1,4 +1,4 @@
-package com.shopAPI.refreshME.model;
+package com.shopAPI.refreshME.models;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

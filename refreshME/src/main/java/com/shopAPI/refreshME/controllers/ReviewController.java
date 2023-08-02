@@ -1,4 +1,4 @@
-package com.shopAPI.refreshME.controller;
+package com.shopAPI.refreshME.controllers;
 
 
 import org.springframework.web.bind.annotation.RestController;

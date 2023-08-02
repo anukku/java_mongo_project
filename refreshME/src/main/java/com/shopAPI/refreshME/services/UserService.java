@@ -1,6 +1,6 @@
-package com.shopAPI.refreshME.service;
+package com.shopAPI.refreshME.services;
 
-import com.shopAPI.refreshME.model.User;
+import com.shopAPI.refreshME.models.User;
 import com.shopAPI.refreshME.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,6 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
-
-    public Optional<User> getUserById(String id){
-        return userRepository.findById(id);
     }
 
     public List<User> getAll(){
@@ -39,6 +35,10 @@ public class UserService {
             }
         }
         return Optional.empty(); // Login failed
+    }
+
+    public boolean doesUserExist(String username) {
+        return userRepository.findByUserName(username).isPresent();
     }
 
 

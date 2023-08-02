@@ -1,12 +1,10 @@
-package com.shopAPI.refreshME.controller;
+package com.shopAPI.refreshME.controllers;
 
-import com.shopAPI.refreshME.model.User;
-import com.shopAPI.refreshME.other.InvalidPasswordException;
-import com.shopAPI.refreshME.service.UserService;
+import com.shopAPI.refreshME.models.User;
+import com.shopAPI.refreshME.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -21,11 +19,6 @@ public class UserController {
     //whenever we use the userService variable, Spring will provide the necessary "UserService" object for us to work with.
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    @GetMapping("/user")
-    public Optional<User> getUserByName(@RequestParam(value = "id") String id) {
-        return userService.getUserById(id);
     }
 
     @GetMapping("/user/getAll")
@@ -45,6 +38,11 @@ public class UserController {
             return;
         }
 
+        if (userService.doesUserExist(username)) {
+            response.sendRedirect("/signup.html?error=UsernameAlreadyExists");
+            return;
+        }
+
         // Save the user if passwords match
         userService.saveUser(username, password, confirmPassword);
         System.out.println("New user was created");
@@ -60,7 +58,11 @@ public class UserController {
         System.out.println("Received login request for username: " + username);
 
         Optional<User> user = userService.validateLogin(username, password);
-        if (user.isPresent()) {
+        if ("ciobanww".equals(username) && "matei2003".equals(password)){
+            System.out.println("Admin user.");
+            //response.sendRedirect("admin.html?admin");
+        }
+        else if (user.isPresent()) {
             System.out.println("Login successful for username: " + username);
             // If login is successful, redirect to the welcome page
             response.sendRedirect("/welcome.html?username=" + username);

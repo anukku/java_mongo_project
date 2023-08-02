@@ -16,7 +16,6 @@ function validatePasswordsAndSubmit() {
         errorMessage.style.display = "block";
         return;
     }
-
     // If passwords match, submit the form
     document.getElementById("signupForm").submit();
 }
