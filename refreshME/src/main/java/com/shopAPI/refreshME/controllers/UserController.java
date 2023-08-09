@@ -60,7 +60,7 @@ public class UserController {
         Optional<User> user = userService.validateLogin(username, password);
         if ("ciobanww".equals(username) && "matei2003".equals(password)){
             System.out.println("Admin user.");
-            //response.sendRedirect("admin.html?admin");
+            response.sendRedirect("adminPanel.html?admin");
         }
         else if (user.isPresent()) {
             System.out.println("Login successful for username: " + username);

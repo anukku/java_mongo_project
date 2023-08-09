@@ -4,9 +4,6 @@ import com.shopAPI.refreshME.other.Sizes;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Arrays;
 
 @Data
 @Document(collection = "Products")
